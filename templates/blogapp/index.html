@@ -5,10 +5,11 @@
 ----
 
 {% for post in ps %}
-#### ![](/static/img/blog.png "{{ post.title }}")[{{ post.title }}]({{ url('blogapp.views.post_detail',args=[post.pk]) }})
-> <!--{{ post.published_date }}--> {% if request.user.is_authenticated() %} | <a href="{{url('post_edit',args=[post.pk])}}">edit</a> {%endif%}
+#### ![](/static/img/blog.png "{{ post.title }}")[{{ post.title }}]({{ url('blogapp.views.post_detail',args=[post.pk]) }}) <small class='text-right'> Published at: {{ post.published_date }} {% if request.user.is_authenticated() %} | <a href="{{url('post_edit',args=[post.pk])}}">edit</a> {%endif%} </small>
 
 {{ post.text|safe }}
+
+
 
 ----
 {% endfor %}
