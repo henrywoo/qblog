@@ -1,0 +1,79 @@
+{% include 'header.html' %}
+<style type="text/css">
+@media (min-width: 768px) {
+.form-signin {
+    max-width: 380px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.form-signin-inner{
+    padding: 9px 29px 29px;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox, .form-signin h2 {
+    margin-bottom: 30px;
+}
+.form-signin .form-actions{
+    margin: 0;
+}
+#id_username, #id_password{
+    display: block;
+    font-size: 16px;
+    height: 44px;
+    width: 100%;
+}
+}
+</style>
+<div class="row">
+        <div class="col-sm-12">
+            <br>
+        </div>
+</div>
+
+<!-- Content -->
+<div id="content" class="colM">
+<div id="content-main">
+<form class="form-signin" action="" method="post" id="login-form">
+  <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token }}' />
+  <div class="form-signin-inner">
+  <h2>Login</h2>
+
+
+  <div class="form-group">
+    <label for="id_username">Username:</label>
+    <p class="text-danger"></p>
+    <input class="form-control" id="id_username" maxlength="254" name="username" placeholder="Username" required="required" title="" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="id_password">Password:</label>
+    <p class="text-danger"></p>
+    <input class="form-control" id="id_password" name="password" placeholder="Password" required="required" title="" type="password" />
+    <input type="hidden" name="next" value="/sentosa/" />
+  </div>
+
+
+  <div class="form-actions clearfix">
+      <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-block" />
+  </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#id_username').attr('autocapitalize', 'off').focus();
+})
+</script>
+</div>
+
+
+    </div>
+    <!-- END Content -->
+
+{% include 'footer.html' %}
+

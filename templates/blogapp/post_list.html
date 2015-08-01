@@ -1,0 +1,12 @@
+{% extends 'blogapp/base.html' %}
+{% block content %}
+{% for post in posts %}
+###[{{ post.title }}]({% url 'blogapp.views.post_detail' pk=post.pk %})
+  Published: {{ post.published_date }}
+
+{% autoescape off %}
+{{ post.text }}
+{% endautoescape %}
+----
+{% endfor %}
+{% endblock content %}

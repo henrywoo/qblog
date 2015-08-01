@@ -1,0 +1,20 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+----
+
+{% if request.user.is_authenticated() %}
+{% if post.published_date %}
+{{ post.published_date }}
+{% else %}<a class="btn btn-primary btn-sm" href="{{ url('blogapp.views.post_publish',args=[post.pk]) }}">Publish</a>{% endif %}
+<a class="btn btn-success btn-sm" href="{{url('post_edit',args=[post.pk])}}"><span class="glyphicon glyphicon-pencil">Edit</span></a>
+<a class="btn btn-danger btn-sm" href="{{url('post_remove',args=[post.pk])}}"><span class="glyphicon glyphicon-remove">Delete</span></a>
+{% endif %}
+
+####{{ post.title }}
+
+{{ post.text|safe }}
+
+----
+
+{% endblock content %}

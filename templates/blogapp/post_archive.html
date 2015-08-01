@@ -1,0 +1,10 @@
+{% extends 'blogapp/base.html' %}
+{% block content %}
+----
+
+{% for post in latest %}
+- [{{ post.title }}]({{ url('blogapp.views.post_detail',args=[post.pk]) }}) <small>{{post.published_date}}</small>
+{% endfor %}
+
+
+{% endblock content %}

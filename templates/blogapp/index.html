@@ -1,0 +1,16 @@
+{% extends 'blogapp/base.html' %}
+{% block content %}
+{{nav|safe}}
+
+----
+
+{% for post in ps %}
+#### ![](/static/img/blog.png "{{ post.title }}")[{{ post.title }}]({{ url('blogapp.views.post_detail',args=[post.pk]) }})
+> <!--{{ post.published_date }}--> {% if request.user.is_authenticated() %} | <a href="{{url('post_edit',args=[post.pk])}}">edit</a> {%endif%}
+
+{{ post.text|safe }}
+
+----
+{% endfor %}
+
+{% endblock content %}

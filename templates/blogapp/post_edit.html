@@ -1,0 +1,28 @@
+{% include 'header.html' %}
+
+<script type="text/javascript">
+//<![CDATA[
+        (function($) {
+            $(document).ready(function() {
+                $('input[type="submit"]').addClass('btn');
+                $('[title]').tooltip();
+            });
+        }(jQuery));
+
+//]]>
+</script>
+
+
+<div class=" dashboard">
+<div class="row">
+    <form method="POST" class="post-form"><input class="control-group" type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        {{ form.as_p() |safe }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</div>
+</div>
+<script>
+    $("#id_title").attr('class','form-control');
+</script>
+{% include 'footer.html' %}
+<!--script src="/static/v/0.2/strapdown.js"></script-->

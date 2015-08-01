@@ -1,0 +1,48 @@
+{% include 'header.html' %}
+<script type="text/javascript" src="http://{{domain}}/static/reconnecting-websocket.min.js"></script>
+<script type="text/javascript" src="http://{{domain}}/static/smoothie.js"></script>
+
+      <div class="row">
+            <div class="col-lg-6">
+                  {{global['account']}} | <span id='FullAvailableFunds_S'></span>|
+                  <span id='RealizedPnL'></span>|
+                  <span id='UnrealizedPnL'></span>|
+                  <span id='NetLiquidation_S'></span>|
+                  Mode:
+                  {% if (global['mode']=="trade")%}<span class="btn-warning">Trade</span>
+                  {%else%}{{global['mode']}}{%endif%} |
+                  <span id="timecost"></span> | <span id="servertime"></span>
+            </div>
+            <div class="col-lg-6 text-right">
+              <button class="label label-danger" id="clearportfolio" data-toggle="tooltip" title="Close all positions">
+                <!--span class="glyphicon glyphicon-flash"></span-->clear
+              </button>
+            </div>
+            <div class="col-lg-6">
+                  <span id="_portfolio"></span>
+            </div>
+            <div class="col-lg-6">
+                  <div id="_order_div"></div>
+            </div>
+      </div>
+
+      <div class="row">
+            <div class="col-lg-12">
+              <div id="_mkdata_table"></div>
+              <hr>
+              <div id="message"></div><br>
+            </div>
+      </div>
+
+
+<script>
+    var ws = new ReconnectingWebSocket('ws://{{domain}}:16180/ws');
+    var symbols = {{ SYMBOLS | safe }};
+
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+<script src="http://{{domain}}/static/constant.js"></script>
+<script src="http://{{domain}}/static/sentosa.js"></script>
+{% include 'footer.html' %}

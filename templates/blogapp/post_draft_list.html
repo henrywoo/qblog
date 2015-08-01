@@ -1,0 +1,21 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+{% for post in posts %}
+----
+
+
+{% if request.user.is_authenticated() %}
+{% if post.published_date %}
+__ {{ post.published_date }} __
+{% else %}<a class="btn btn-primary btn-sm" href="{{url('blogapp.views.post_publish',args=[post.pk])}}"><span class="glyphicon glyphicon-pencil">Publish</span></a>{% endif %}
+<a class="btn btn-success btn-sm" href="{{url('post_edit',args=[post.pk])}}"><span class="glyphicon glyphicon-pencil">EDIT</span></a>
+<a class="btn btn-danger btn-sm" href="{{url('post_remove',args=[post.pk])}}"><span class="glyphicon glyphicon-remove">DELE</span></a>
+{% endif %}
+
+#### ![](/static/img/blog.png "{{ post.title }}")[{{ post.title }}]({{ url('blogapp.views.post_detail',args=[post.pk]) }})
+
+{{ post.text|safe }}
+
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% include 'header.html' %}
+  <div class="row">
+        <textarea rows="30" cols="160" id="message">
+        </textarea> 
+  </div>
+
+  <script>
+    //var ws = new WebSocket('ws://research.quant365.com:8888/ws');
+    var ws = new WebSocket('ws://{{domain}}/ws');
+    var $message = $('#message');
+
+    ws.onopen = function(){
+      //$message.attr("class", 'label label-success');
+    };
+
+    ws.onmessage = function(ev){
+      //$message.attr("class", 'label label-info');
+      var json = JSON.parse(ev.data);
+      if (json.msg == "hello"){
+        ws.send("AddMeToObserverLOG");
+        //alert('I wanna msg.');
+      }else{
+        if (json.hasOwnProperty('msg')){
+          $message.val($message.val()+json.msg);
+        }else{
+          $message.val($message.val()+ev.data+"\n");
+        }
+        $("textarea").scrollTop(9999999)
+      }
+    };
+
+    ws.onclose = function(ev){
+      //$message.attr("class", 'label label-important');
+      $message.text('closed');
+    };
+
+    ws.onerror = function(ev){
+      //$message.attr("class", 'label label-warning');
+      $message.text('error occurred');
+    };
+  </script>
+
+{% include 'footer.html' %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Server Side Command</title>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <center>
+    <h1>Server Side Shell</h1>
+        <textarea rows="30" cols="200" id="message">
+        </textarea> 
+    </center>
+
+  </div>
+
+<!-- ********************************************************************* -->
+  <script>
+    var ws = new WebSocket('ws://research.quant365.com:8888/ws');
+    var $message = $('#message');
+
+    ws.onopen = function(){
+      //$message.attr("class", 'label label-success');
+    };
+
+    ws.onmessage = function(ev){
+      //$message.attr("class", 'label label-info');
+      var json = JSON.parse(ev.data);
+      if (json.msg == "hello"){
+        ws.send("iwantmsg");
+        //alert('I wanna msg.');
+      }else{
+        $message.val($message.val()+json.msg);
+        $("textarea").scrollTop(99999)
+      }
+    };
+
+    ws.onclose = function(ev){
+      //$message.attr("class", 'label label-important');
+      $message.text('closed');
+    };
+
+    ws.onerror = function(ev){
+      //$message.attr("class", 'label label-warning');
+      $message.text('error occurred');
+    };
+  </script>
+<!-- ********************************************************************* -->
+
+
+</body>
+</html>

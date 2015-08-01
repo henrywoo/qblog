@@ -1,0 +1,69 @@
+{% include 'header.html' %}
+<script type="text/javascript" src="http://{{domain}}/static/reconnecting-websocket.min.js"></script>
+<script type="text/javascript" src="http://{{domain}}/static/smoothie.js"></script>
+      <div id="message"></div><br>
+      <div class="row">
+              <div class="col-lg-6">
+                  Account: {{global['account']}} | Mode:{% if (global['mode']=="trade")%}<span class="btn-warning">Trade</span>{%else%}{{global['mode']}}{%endif%} | <span id="timecost"></span> | <span id="servertime"></span>
+                  <br>
+                  <div id="_order_div"></div>
+             </div>
+             <div class="col-lg-6">
+                  <span id="_portfolio"></span>
+                  <button type="button" class="btn btn-xs btn-success" id="clearportfolio">
+                    <span class="glyphicon glyphicon-flash">ClearPortfolio</span>
+                  </button>
+             </div>
+      </div>
+
+      <div class="row">
+            <div class="col-lg-12">
+              <b>Market Data</b>
+              <div id="_mkdata_table"></div>
+            </div>
+
+            <div class="col-lg-6">
+              <b>Trade Info(FS)</b>
+              <table class="table table-striped table-bordered table-condensed" id="Tradeinfo">
+                <thead><tr class="success"><th>SYM</th><th>POS</th><th>avgP</th><th>PNL</th><th>LstP</th><th>Status</th><th>dt</th></tr></thead>
+                <tbody>
+                {% for s in SYMBOLS %}
+                <tr>
+                  <td><b>{{s}}</b>
+                  <td>{{ti.get(s)[0]['vo']}}
+                  <td>{{ti.get(s)[0]['ps']}}
+                  <td>
+                  {% for p in ti.get(s)[0]['ps'] %}
+                    {{ (getLastPrice(s)[0] - p) * ti.get(s)[0]['vo'][loop.index-1] }}<br>
+                  {% endfor %}
+                  <td id="LAST_PRICE_{{s}}">{{getLastPrice(s)[0]}}
+                  <td>{{ POSITION_STATUS[ti.get(s)[0]['statuz']]}}
+                  <td>{{ ti.get(s)[1]}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+
+              <b>Transaction</b>
+              {{cquery.Query("SELECT * FROM transaction order by dt desc limit 10").to_html(buf=None, columns=None, col_space=None, colSpace=None,
+              header=False, classes='table table-striped table-bordered table-condensed')|safe }}
+
+            </div>
+            <div class="col-lg-6">
+              <b>Trade Info(Memory)</b>
+              <div id="_tinfo_table"></div>
+              <b>Log</b>
+              <textarea rows="10" cols="10" id="log"></textarea>
+            </div>
+
+      </div>
+
+
+<script>
+    var ws = new ReconnectingWebSocket('ws://{{domain}}:16180/ws');
+    var symbols = {{ SYMBOLS | safe }};
+
+</script>
+<script src="http://{{domain}}/static/constant.js"></script>
+<script src="http://{{domain}}/static/fullpage.js"></script>
+{% include 'footer.html' %}

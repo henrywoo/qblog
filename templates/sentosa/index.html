@@ -1,0 +1,118 @@
+{% include 'header.html' %}
+
+  <div class="container">
+     <span>
+         Account: {{global['account']}} | Mode:
+         {% if (global['mode']=="trade")%}<button type="button" class="btn btn-lg btn-warning">Trade</button>
+         {%else%}{{global['mode']}}{%endif%}
+     </span>
+      <div class="row">
+        <div class="col-md-4">
+          <h3>Transaction</h3>
+          {{cquery.Query("SELECT * FROM transaction").to_html(buf=None, columns=None, col_space=None, colSpace=None,
+          header=False, classes='table table-striped table-bordered table-condensed')|safe }}
+
+          <h3>Position</h3>
+          <table class="table table-striped table-bordered table-condensed">
+            <tr><th>SYMBOL</th><th>Position</th><th>avgPrice</th></tr>
+            {% for s in SYMBOLS %}
+            <tr>
+              <td> {{s}} </td>
+              <td id="pos_{{s}}">
+                {%if s in positions.keys() and positions[s]!=0 %}
+                  <b>{{positions[s]}}</b>
+                {%else%}
+                  0
+                {%endif%}
+              </td>
+              <td id="pnl_{{s}}"> 0 </td>
+            </tr>
+            {% endfor %}
+          </table>
+
+
+          <h3>PNL</h3>
+          <table class="table table-striped table-bordered table-condensed">
+            <tr><th>SYMBOL</th><th>Position</th><th>PNL</th></tr>
+            {% for s in SYMBOLS %}
+            <tr id="row2_{{s}}"><td> {{s}} </td><td> - </td><td id="1"> 0 </td></tr>
+            {% endfor %}
+          </table>
+
+          <h3>Log</h3>
+          Sentosa Status : <span id="message"></span>
+          <textarea rows="10" cols="10" id="log"></textarea>
+
+        </div>
+
+
+
+        <div class="col-md-8">
+          <h3>Tradeinfo</h3>
+          <table class="table table-striped table-bordered table-condensed">
+            <tr><th>SYM</th><th>POS</th><th>avgP</th><th>PNL</th><th>LstP</th><th>Status</th><th>dt</th></tr>
+            {% for s in SYMBOLS %}
+            <tr>
+              <td><b>{{s}}</b>
+              <td>{{ti.get(s)[0]['vo']}}
+              <td>{{ti.get(s)[0]['ps']}}
+              <td>
+              {% for p in ti.get(s)[0]['ps'] %}
+                {{ (getLastPrice(s)[0] - p) * ti.get(s)[0]['vo'][loop.index-1] }}<br>
+              {% endfor %}
+              <td id="LAST_PRICE_{{s}}">{{getLastPrice(s)[0]}}
+              <td>{{ POSITION_STATUS[ti.get(s)[0]['statuz']]}}
+              <td>{{ ti.get(s)[1]}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+
+          <table class="table table-striped table-bordered table-condensed">
+            {% for s in SYMBOLS %}
+            <tr><td>
+              <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%"> 40% Complete (success) </div>
+              </div>
+              <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%"> 50% Complete (info) </div>
+              </div>
+              <div class="progress">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%"> 40% </div>
+              </div>
+            </td></tr>
+            {% endfor %}
+          </table>
+
+          <table class="table table-striped table-bordered table-condensed">
+            {% for s in SYMBOLS %}
+            <tr><td>Predicted Day Range:<td><span id="dSpd_{{s}}"></span></td>
+            <td>PC OI Ratio:<td><span id="PCOIRatio_{{s}}"></span></td></tr>
+
+            <tr><td>PC Volume Ratio:<td><span id="PCVORatio_{{s}}"></span></td>
+            <td>13-26-52:<td><span id="_13w_{{s}}"></span></td></tr>
+
+            <tr><td>TRP:<td><span id="TRP_{{s}}"></span></td><td>Order<td>-
+            <tr><td>BID_PRICE:<td><span id="BID_PRICE_{{s}}"></span> <td>ASK_PRICE:<td><span id="ASK_PRICE_{{s}}"></span></td></tr>
+            <tr><td colspan="4"><textarea rows="1" cols="20" id="info_{{s}}"></textarea></td></tr>
+            {% endfor %}
+          </table>
+
+          <h3>Market Data</h3>
+          <div id="_mkdata_table"></div>
+
+          <h3>Trade Info</h3>
+          <div id="_tinfo_table"></div>
+
+        </div>
+      </div>
+
+    <hr>
+  </div>
+
+<script>
+var ws = new WebSocket('ws://{{domain}}/ws');
+var symbols = {{ SYMBOLS | safe }};
+</script>
+<script src="../static/index_ws.js"></script>
+{% include 'footer.html' %}
+
