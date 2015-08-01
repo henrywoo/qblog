@@ -19,7 +19,7 @@ def environment(**options):
         'ip': LOCALIP,
         'domain': 'www.quant365.com',
         'title': "Quant365",
-        'anno': "All about trading...",
+        'anno': "trading with science and techonlogy",
         #'cquery': CQuery(),
         #'getLastPrice': getLastPrice,
         #'getTI': getTI,
