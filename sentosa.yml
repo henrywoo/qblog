@@ -1,0 +1,78 @@
+---
+Project: Sentosa
+
+linux:
+  DIRR           : /singapore/research/R/
+  DIRPY          : /singapore/research/Python/py/
+  DATAVOL        : /singapore/research/data/volatility/
+  DATATA         : /singapore/research/data/ta/
+  DIRDOCROOT     : /singapore/research/sentosa.quant365.com/
+  ROOT           : /singapore/
+  LOGDIR         : /singapore/log/
+  LOGFILE        : /singapore/log/sentosa-
+  CONFIGDIR      : /singapore/config/
+  RESEARCHDIR    : /singapore/research/
+  RESEARCHDIRDATA: /singapore/research/data/
+  DATAROOT       : /singapore/data/
+  REPLAYFILEDIR  : /singapore/data/
+  BIDASKDIR      : /singapore/data/bidask/
+  PARAMDIR       : /singapore/data/
+  TRADEINFODIR   : /singapore/data/tradeinfo/
+  LOGFILESIM     : /singapore/log/sim-sentosa-
+
+
+DB:
+  DBHOST:  192.168.254.131
+  DBUSER:  sentosa
+  DBPASS:  sentosa
+  DBNAME:  sentosa
+
+global:
+  mode      : trade #simulation #replay
+  debug     : 0
+  backtest  : 0
+  # Please replace my account with yours
+  account   : DU198457
+  IBHOST    : 127.0.0.1
+  IBPORT    : 7496
+  IB_CLIENT_ID  : 1
+  MKD_TO_ALGO_PORT  : 14142
+  ALGO_TO_OMS_PORT  : 17321
+  ALGO_ENGINE_PORT  : 22361
+  NN_LOG_PORT       : 31415
+  NN_MON_PORT       : 27182
+  WS_PORT           : 16180
+
+  histDataReqNum    : 7
+  histDataSleepT    : 75000
+  histDataBackMN    : 5
+  recordbufsize     : 1024000
+
+protocol:
+  completeJ: "A" 
+  updateJ  : "B" 
+  closeall : "e" 
+  closeone : "f" 
+  cancelall: "g" 
+  lmtorder : "l" 
+  mktorder : "m" 
+
+
+fx:
+  currencies   : [EUR, USD, JPY, GBP, CAD, CHF]
+
+replay:
+  filetoreplay : /singapore/data/spy.replay
+  speedup      : 1
+  sleepingtime : 50
+
+indices:
+  market : [SPY]
+  china  : [FXI]
+
+strategies:
+  singleta: [NQ, CYOU, EJ, RENN,  HTHT, JMEI, BITA, CEA, FXI, MOBL, SPY, LEJU, SINA, SOHU, GOOG, IBM] 
+  
+
+
+
