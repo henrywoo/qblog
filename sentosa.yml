@@ -2,23 +2,23 @@
 Project: Sentosa
 
 linux:
-  DIRR           : /singapore/research/R/
-  DIRPY          : /singapore/research/Python/py/
-  DATAVOL        : /singapore/research/data/volatility/
-  DATATA         : /singapore/research/data/ta/
-  DIRDOCROOT     : /singapore/research/sentosa.quant365.com/
-  ROOT           : /singapore/
-  LOGDIR         : /singapore/log/
-  LOGFILE        : /singapore/log/sentosa-
-  CONFIGDIR      : /singapore/config/
-  RESEARCHDIR    : /singapore/research/
-  RESEARCHDIRDATA: /singapore/research/data/
-  DATAROOT       : /singapore/data/
-  REPLAYFILEDIR  : /singapore/data/
-  BIDASKDIR      : /singapore/data/bidask/
-  PARAMDIR       : /singapore/data/
-  TRADEINFODIR   : /singapore/data/tradeinfo/
-  LOGFILESIM     : /singapore/log/sim-sentosa-
+  DIRR           : ~/.sentosa/
+  DIRPY          : ~/.sentosa/
+  DATAVOL        : ~/.sentosa/
+  DATATA         : ~/.sentosa/
+  DIRDOCROOT     : ~/.sentosa/
+  ROOT           : ~/.sentosa/
+  LOGDIR         : ~/.sentosa/
+  LOGFILE        : ~/.sentosa/sentosa-
+  CONFIGDIR      : ~/.sentosa/
+  RESEARCHDIR    : ~/.sentosa/
+  RESEARCHDIRDATA: ~/.sentosa/
+  DATAROOT       : ~/.sentosa/
+  REPLAYFILEDIR  : ~/.sentosa/
+  BIDASKDIR      : ~/.sentosa/
+  PARAMDIR       : ~/.sentosa/
+  TRADEINFODIR   : ~/.sentosa/
+  LOGFILESIM     : ~/.sentosa/sim-sentosa-
 
 
 DB:
@@ -32,7 +32,7 @@ global:
   debug     : 0
   backtest  : 0
   # Please replace my account with yours
-  account   : DU198457
+  account   : DU198456
   IBHOST    : 127.0.0.1
   IBPORT    : 7496
   IB_CLIENT_ID  : 1
