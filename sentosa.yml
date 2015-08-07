@@ -62,7 +62,7 @@ fx:
   currencies   : [EUR, USD, JPY, GBP, CAD, CHF]
 
 replay:
-  filetoreplay : /singapore/data/spy.replay
+  filetoreplay : ~/.sentosa/replay.dat
   speedup      : 1
   sleepingtime : 50
 
