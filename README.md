@@ -11,3 +11,7 @@ How to install?
 pip install -U django
 pip install -r requirements.txt
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/henrywoo/qblog/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
