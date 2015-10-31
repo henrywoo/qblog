@@ -9,7 +9,7 @@ How to install?
 
 ```
 pip install -U django
-pip install -r requirements.txt
+pip install -Ur requirements.txt
 ```
 
 
