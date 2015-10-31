@@ -55,7 +55,8 @@ protocol:
   closeone : "f" 
   cancelall: "g" 
   lmtorder : "l" 
-  mktorder : "m" 
+  mktorder : "m"
+  orderid  : "i" 
 
 
 fx:
