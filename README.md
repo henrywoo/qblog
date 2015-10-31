@@ -12,6 +12,7 @@ pip install -U django
 pip install -Ur requirements.txt
 ```
 
+![Desgin](https://raw.githubusercontent.com/henrywoo/qblog/master/qblog.jpg)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/henrywoo/qblog/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
