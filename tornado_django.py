@@ -35,18 +35,28 @@ class MultiStaticFileHandler(web.StaticFileHandler):
             return super(MultiStaticFileHandler, self).get(path)
         return web.HTTPError(404)
 
+    def get_content_type(self):
+        name, extension = os.path.splitext(self.absolute_path)
+        if extension and extension.lower() == '.gz':
+            return 'application/x-gzip'
+        if extension and extension.lower() == '.deb':
+            return 'application/vnd.debian.binary-package'
+        return super(MultiStaticFileHandler, self).get_content_type()
+
 def main():
   parse_command_line()
   enable_pretty_logging()
   wsgi_app = wsgi.WSGIContainer(django.core.handlers.wsgi.WSGIHandler())
   staticpath=[
         _HERE+"/static/",
+        _HERE+"/deb/",
         "/usr/local/lib/python2.7/dist-packages/django/contrib/admin/static/",
         "/usr/local/lib/python2.7/dist-packages/django_admin_bootstrapped/static/",
         "/usr/local/lib/python2.7/dist-packages/bootstrap_markdown/static/",
   ]
   mapping = [(r'/(favicon.ico)', web.StaticFileHandler, {'path': _HERE + "/static"}),
               (r'/static/(.*)', MultiStaticFileHandler, {'paths': staticpath}),
+              (r'/deb/(.*)', MultiStaticFileHandler, {'paths': staticpath}),
               ('.*', web.FallbackHandler, dict(fallback=wsgi_app)),
   ]
   tornado_app = web.Application(mapping, debug=True)
