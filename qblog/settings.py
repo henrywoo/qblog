@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'taggit',
     'blogapp',
-    'sentosa',
+    'sentosaapp',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -66,10 +66,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-#TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
-#    "sentosa.context_processors.sentosa_global",
-#)
-
 ROOT_URLCONF = 'qblog.urls'
 
 TEMPLATES = [
@@ -80,7 +76,6 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'environment': 'qblog.jinja2.environment',
-            #'context_processors': DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS +("sentosa.context_processors.sentosa_global",),
         },
     },
     {

@@ -15,16 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from sentosa import views as sentosaview
+from sentosaapp import views as sentosaappview
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('blogapp.urls')),
-    url(r'^sentosa/', include('sentosa.urls')),
+    url(r'^sentosaapp/', include('sentosaapp.urls')),
     url(r'^markdown/', include('django_bootstrap_markdown.urls')),
     #url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'admin/login.html'}, name="my_login"),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'sentosa/login.html'}, name="my_login"),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'sentosaapp/login.html'}, name="my_login"),
 ]
 
 
-handler404 = sentosaview.error404
+handler404 = sentosaappview.error404

@@ -77,7 +77,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $.getJSON('http://{{domain}}/sentosa/data/{{sym}}/callback=?', function (data) {
+        $.getJSON('http://{{domain}}/sentosaapp/data/{{sym}}/callback=?', function (data) {
             $('#YahooDaily').highcharts('StockChart', { rangeSelector : { selected : 1 },
                 title : { text : '{{sym}} Daily Stock Price' },
                 series : [{ name : '{{sym}}', data : data, tooltip: { valueDecimals: 2 } }] });
