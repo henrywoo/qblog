@@ -36,13 +36,13 @@
         <div class="col-xs-12">
         <ul id='md' class="nav nav-tabs">
             <li id="tab_home"><a href="http://{{domain}}/">Home</a></li>
-            <li id="tab_sentosa"><a href=/sentosa>Sentosa</a>
+            <li id="tab_sentosaapp"><a href=/sentosaapp>Sentosa</a>
             <li id="tab_blog"><a href=/blog>Blog</a>
             <li id="tab_about"><a href=/about>About</a>
         {% if request.user.is_authenticated() %}
             <li id="tab_new"><a href=/post/new>New</a></li>
             <li id="tab_drafts"><a href="{{ url('post_draft_list') }}">Draft</a></li>
-            <li><a href=/sentosa/monitor>Log</a>
+            <li><a href=/sentosaapp/monitor>Log</a>
         {% else %}
         {% endif %}
         </ul>
